@@ -98,7 +98,11 @@ protoBuf一种语言中立，平台无关，可扩展的串行化结构化数据
 
 但是，协议缓冲区并不总是比XML更好的解决方案-例如，协议缓冲区不是用标记（例如HTML）对基于文本的文档建模的好方法，因为您无法轻松地将结构与文本交错。 另外，XML是人类可读的，可编辑的， 协议缓冲区至少以其本地格式不是。 XML在某种程度上也是自我描述的。 如果您有消息定义（.proto文件），协议缓冲区才有意义。
 
+### 四.Protocol Buffers的使用
 
+下载包-完整的源码包中包含了Java,Python和C++的Protocol Buffer编译器，也包含你需要的IO测试。创建和安装你的编译器，在README文件中有详细的说明，在后面的内容中将介绍。
+
+Once you're all set, try following the tutorial for your chosen language – this will step you through creating a simple application that uses protocol buffers.
 
 
 
