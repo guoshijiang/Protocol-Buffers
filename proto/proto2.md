@@ -23,10 +23,14 @@ SearchRequest消息定义了三个字段（名字/值对），数据中的没有
 
 ### 二.分配标签
 
-如你看到的一样，每个字段在消息定义中都有一个唯一的数字标志。这些标志在消息二进制格式中用来标识你的字段，只要你的消息类型在使用这些标识值都不会改变。
+如你看到的一样，每个字段在消息定义中都有一个唯一的数字标志。这些标志在消息二进制格式中用来标识你的字段，只要你的消息类型在使用这些标识值都不会改变。请注意，值为1到15的变量需要一个字节进行编码，包括标识号和字段类型（您可以在协议缓冲区编码中找到更多相关信息）。 范围16到2047中的标签需要两个字节。 因此，您应该为非常频繁出现的消息元素预留标签1至15。 请记住为将来可能添加的频繁出现的元素留出一些空间。
+
+最小的标识数字可以指定为1，最大值是2的29次方-1，或者是536,870,911。你不能使用数字19000到19999(FieldDescriptor::kFirstReservedNumber到FieldDescriptor::kLastReservedNumber), 因为它们是为协议缓冲区实现保留的。如果您在.proto中使用这些保留的数字之一，则协议缓冲区编译器会发出错误。 同样，您不能使用任何以前保留的标签。
+
+### 三.指定字段的规则
 
 
-As you can see, each field in the message definition has a unique numbered tag. These tags are used to identify your fields in the message binary format, and should not be changed once your message type is in use. Note that tags with values in the range 1 through 15 take one byte to encode, including the identifying number and the field's type (you can find out more about this in Protocol Buffer Encoding). Tags in the range 16 through 2047 take two bytes. So you should reserve the tags 1 through 15 for very frequently occurring message elements. Remember to leave some room for frequently occurring elements that might be added in the future.
+
 
 
 
