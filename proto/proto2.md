@@ -98,22 +98,24 @@ SearchRequest消息定义了三个字段（名字/值对），数据中的没有
 
 标量消息字段可以具有以下类型之一;该表显示.proto文件中指定的类型以及自动生成的类中的相应类型：
 
- |   .proto 类型  |    C++类型    |    Java类型      |       python类型      |      Go类型      |     
+
+ |   .proto 类型  |    C++类型    |    Java类型      |       python类型     |      Go类型      |     
  |---------------|--------------|------------------|----------------------|------------------| 
- |   double		|   double	   |      double	  |       float	         |     *float64     |
- |   float		|   float	   |      float	      |       float          |     *float32     |
- |   int32	    |	int32	   |      int	      |       int	         |     *int32       |
- |   int64		|   int64	   |      long	      |      int/long[3]	 |     *int64       |
- |   uint32		|   uint32	   |      int[1]	  |      int/long[3]	 |     *uint32      |
- |   uint64		|   uint64	   |      long[1]	  |      int/long[3]	 |     *uint64      |
- |   sint32	  	|   int32	   |      int	      |      int	         |     *int32       |
- |   sint64		|   int64	   |      long	      |      int/long[3]	 |     *int64       |
- |   fixed32		|   uint32	   |      int[1]	  |      int	         |     *uint32      |
- |   fixed64	    |   uint64	   |      long[1]	  |      int/long[3]	 |     *uint64      |
- |   sfixed32	|	int32	   |      int	      |      int	         |     *int32       |
- |   sfixed64	|	int64	   |      long	      |      int/long[3]	 |     *int64       |
- |   bool		|   bool	   |      boolean	  |      bool	         |     *bool        |
- |   string		|   string	   |      String	  |      str/unicode[4]	 |     *string      |
+ 
+ |   double		 |   double	   |      double	  |       float	         |     *float64     |
+ |   float		 |   float	   |      float	      |       float          |     *float32     |
+ |   int32	     |	int32	   |      int	      |       int	         |     *int32       |
+ |   int64		 |   int64	   |      long	      |      int/long[3]	 |     *int64       |
+ |   uint32		 |   uint32	   |      int[1]	  |      int/long[3]	 |     *uint32      |
+ |   uint64		 |   uint64	   |      long[1]	  |      int/long[3]	 |     *uint64      |
+ |   sint32	  	 |   int32	   |      int	      |      int	         |     *int32       |
+ |   sint64		 |   int64	   |      long	      |      int/long[3]	 |     *int64       |
+ |   fixed32	 |   uint32	   |      int[1]	  |      int	         |     *uint32      |
+ |   fixed64	 |   uint64	   |      long[1]	  |      int/long[3]	 |     *uint64      |
+ |   sfixed32	 |	int32	   |      int	      |      int	         |     *int32       |
+ |   sfixed64	 |	int64	   |      long	      |      int/long[3]	 |     *int64       |
+ |   bool		 |   bool	   |      boolean	  |      bool	         |     *bool        |
+ |   string		 |   string	   |      String	  |      str/unicode[4]	 |     *string      |
  |   bytes       |	string	   |      ByteString  |      str             |     []byte       |
 
 
