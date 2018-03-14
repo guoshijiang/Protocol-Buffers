@@ -119,4 +119,55 @@ SearchRequest消息定义了三个字段（名字/值对），数据中的没有
 
 ### 九.可选择字段和默认值
 
+就像上面提到的，消息中的元素标签是可选的。一个完美格式的消息可能不会包含一个可选择的标签。一个消息被解析时，如果消息中不包含一个可选的元素，在对象解析中对应的域会为相应的字段设置默认值。默认值会被指定为消息描述的一部分。例如：我们希望给SearchRequest的result_per_page值提供一个默认值为10
+
+    optional int32 result_per_page = 3 [default = 10];
+
+如果默认值没有被指定为一个可选择元素，将用类型指定默认值来替代：对于strings,默认值是一个空字符串，对于bool型，默认值是false，对于数字类型，默认值是0.对于枚举，默认值是枚举定义列表中的第一个值。这将意味着定义枚举时你需要给枚举列表中的第一个变量添加一个值。
+
+### 十.枚举
+
+当你定义一个消息类型时，你可能想这些字段中的一个字段的值在预定义列表中仅仅有一个。例如：你想要为每一个SearchRequest添加一个全集字段，这个全集字段可能是UNIVERSAL, WEB, IMAGES, LOCAL, NEWS, PRODUCTS或者VIDEO.这是非常简单的在消息定义中通过添加一个枚举-枚举类型的字段仅仅有一个值指定设置的常量做为其值（如果你尝试提供不同的值，解释器将会将其看成一个未知字段）。在下面的例子中，我们添加了一个带有所有可能的值得枚举集合，字段类型是集合：
+
+    message SearchRequest {
+      required string query = 1;
+      optional int32 page_number = 2;
+      optional int32 result_per_page = 3 [default = 10];
+      enum Corpus {
+        UNIVERSAL = 0;
+        WEB = 1;
+        IMAGES = 2;
+        LOCAL = 3;
+        NEWS = 4;
+        PRODUCTS = 5;
+        VIDEO = 6;
+      }
+      optional Corpus corpus = 4 [default = UNIVERSAL];
+    }
+
+假设相同的值对于不同的枚举常量你可以起别名。做这件事需要设置allow_alias option为true，如果当别名被发现，其他的protocol编译器将产生一个错误的消息
+
+    enum EnumAllowingAlias {
+      option allow_alias = true;
+      UNKNOWN = 0;
+      STARTED = 1;
+      RUNNING = 1;
+    }
+    enum EnumNotAllowingAlias {
+      UNKNOWN = 0;
+      STARTED = 1;
+      // RUNNING = 1;  // Uncommenting this line will cause a compile error inside Google and a warning message outside.
+    }
+
+枚举器常量必须在32-位整形的范围内。由于枚举值在线路上使用varint编码，所以负值效率不高，因此不推荐使用。你可在消息内部定义枚举，就像上面的列子一样，或者在外部-在proto文件中你的定义中这枚举可以被重用。您还可以使用语法MessageType.EnumType将一个消息中声明的枚举类型用作不同消息中字段的类型。
+
+当你对一个使用了枚举的.proto代码运行rotocol buffer编译器，产生的代码将会对应java或者C++中的枚举，对于Python来说会产生一个特别的EnumDescriptor类，这个类用来在运行产生类设置一些整形的标志常量
+
+有关如何在应用程序中使用消息枚举的更多信息，请参阅所选语言的生成代码部分内容。
+
+
+
+
+
+
 
