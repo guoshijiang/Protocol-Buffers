@@ -196,4 +196,8 @@ SearchRequest消息定义了三个字段（名字/值对），数据中的没有
 
 
 
+In the above example, the Result message type is defined in the same file as SearchResponse – what if the message type you want to use as a field type is already defined in another .proto file?
+
+
+
 
