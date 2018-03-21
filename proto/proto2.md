@@ -192,12 +192,30 @@ SearchRequest消息定义了三个字段（名字/值对），数据中的没有
 
 ### 一.引入定义
 
+在上面的例子中，`Result`消息类型在与`SearchResponse`相同的文件中定义-如果您希望用作字段类型的消息类型已经在另一个`.proto`文件中定义，该怎么办？
+
+你可以通过在其他`proto`文件定义然后通过import关键字引入他们，引入另一个proto的定义，在文件顶部引入import陈述：
+
+    import "myproject/other_protos.proto";
+
+默认情况下，你仅仅只能使用定义直接从`.proto`文件中引入。然而，有时你可能需要将`.proto`文件移动到另一个新的位置。
+
+默认情况下，您只能使用直接导入的.proto文件中的定义。 但是，有时您可能需要将.proto文件移至新位置。 不是直接移动.proto文件，而是在一次更改中更新所有调用站点，现在您可以在旧位置放置一个虚拟.proto文件，以使用导入公共概念将所有导入转移到新位置。 任何人输入包含导入公开声明的协议都可以传递依赖进口公共依赖关系。 例如：
+
+    // new.proto
+    // 所有的定义被移动到这儿
+
+    // old.proto
+    // 这个proto所有的客户端都能引入
+    import public "new.proto";
+    import "other.proto";
+
+    // client.proto
+    import "old.proto";
+    // 你可以从old.proto和new.proto使用定义,但不能是other.proto
 
 
 
-
-In the above example, the Result message type is defined in the same file as SearchResponse – what if the message type you want to use as a field type is already defined in another .proto file?
-
-
+The protocol compiler searches for imported files in a set of directories specified on the protocol compiler command line using the -I/--proto_path flag. If no flag was given, it looks in the directory in which the compiler was invoked. In general you should set the --proto_path flag to the root of your project and use fully qualified names for all imports.
 
 
